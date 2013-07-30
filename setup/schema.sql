@@ -2,14 +2,14 @@
 -- CREATE DATABASE mycel2;
 -- CREAT USER {username}
 -- GRANT ALL ON mycel2.* TO '{username}'@localhost IDENTIFIED BY '{password}';
---- mysql -u {username} -p < schema.sql
+-- mysql -u {username} -p < schema.sql
 
 USE mycel2;
 SET storage_engine=INNODB;
 
 CREATE TABLE UserTypes (
     id   INT NOT NULL AUTO_INCREMENT,
-    type VARCHAR(128) NOT NULL UNIQUE KEY,
+    name VARCHAR(128) NOT NULL UNIQUE KEY,
 
     PRIMARY KEY (id)
 );
@@ -66,20 +66,6 @@ CREATE TABLE YearHours (
     FOREIGN KEY (opening_hours) REFERENCES OpeningHours(id)
 );
 
-CREATE TABLE Options (
-    id            INT NOT NULL AUTO_INCREMENT,
-    opening_hours INT,
-    homepage      VARCHAR(256),
-    printer       VARCHAR(128),
-    age_min       INT,
-    age_max       INT,
-    minutes       INT,
-    short_minutes INT,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (opening_hours) REFERENCES YearHours(id)
-);
-
 CREATE TABLE ExceptionHours (
     id            INT NOT NULL AUTO_INCREMENT,
     weeknr        INT NOT NULL,
@@ -96,6 +82,20 @@ CREATE TABLE WeekExceptions (
     PRIMARY KEY(year, week),
     FOREIGN KEY (year) REFERENCES YearHours(id),
     FOREIGN KEY (week) REFERENCES ExceptionHours(id)
+);
+
+CREATE TABLE Options (
+    id            INT NOT NULL AUTO_INCREMENT,
+    opening_hours INT,
+    homepage      VARCHAR(256),
+    printer       VARCHAR(128),
+    age_min       INT,
+    age_max       INT,
+    minutes       INT,
+    short_minutes INT,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (opening_hours) REFERENCES YearHours(id)
 );
 
 CREATE TABLE Levels (
