@@ -1,0 +1,125 @@
+WEBSOCKET JSON TRANSACTION PROTOCOL
+
+Channels:
+ws://localhost/channels/{level-id}/{level-id}/..
+needs thinking
+
+
+Authenticate user
+=================
+
+{
+  "action": "authenticate",
+  "user": {
+    "username": "gjest",
+    "password": "secret"
+  }
+}
+
+answer:
+
+{
+  "authenticated": true
+  "user": {
+    "ID": 123,
+    "username": "gjest",
+    "name": "gjest",
+    "minutes_left": 30,
+    "age": 20
+  }
+}
+
+answer:
+
+{
+  "authenticated": false
+  "user": {
+    "username": "gjest"
+  }
+}
+
+
+User logs on
+============
+
+{
+  "action": "log-on",
+  "user": {
+    "ID": 123,
+    "username": "N0012345",
+    "name": "Bob Bobsen",
+    "minutes_left": 30
+  },
+  "clientID": "e8:03:9a:a6:7f:c6"
+}
+
+answer?
+
+User logs off
+=============
+
+{
+  "action": "log-off",
+  "user": {
+    "ID": 123,
+    "username": "N0012345",
+    "name": "Bob Bobsen",
+    "minutes_left": 30
+  },
+  "clientID": "e8:03:9a:a6:7f:c6"
+}
+
+answer?
+
+Time status update
+==================
+
+{
+  "action": "status",
+  "user": {
+    "ID": 123,
+    "username": "N0012345",
+    "name": "Bob Bobsen",
+    "minutes_left": 30
+  },
+  "clientID": "e8:03:9a:a6:7f:c6",
+}
+
+Send message to user
+====================
+Message displayed in pop-up messagebox in which user have to press OK.
+{
+  "action": "message",
+  "clientID": "e8:03:9a:a6:7f:c6",
+  "message": "Du har bare 5 minutter igjen!"
+}
+
+Kick out
+========
+Force disconnet without warning. Send a message first if you want to warn user.
+
+{
+  "action": "disconnect",
+  "user": {
+    "ID": 123,
+    "username": "N0012345",
+    "name": "Bob Bobsen",
+    "minutes_left": 30
+  },
+  "clientID": "e8:03:9a:a6:7f:c6"
+}
+
+
+Ping
+====
+Used to test if client is connected
+
+{
+  "action": "ping"
+}
+
+answer:
+
+{
+  "action": "pong"
+}
