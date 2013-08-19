@@ -1,0 +1,22 @@
+All endpoints support GET,
+as well as PUT, POST, PATCH & DELETE on single items
+
+Levels: (A Level is a place or a level in an organization hierarchy)
+http://localhost:9000/API/levels/3
+http://localhost:9000/API/levels?parent=1
+http://localhost:9000/API/levels?type=Branch
+
+Clients:
+http://localhost:9000/API/clients/e8:03:9a:a6:7f:c6
+http://localhost:9000/API/clients?level=2
+http://localhost:9000/API/clients?filter=occupied/available
+
+Users:
+http://localhost:9000/API/users
+http://localhost:9000/API/users/4
+http://localhost:9000/API/users?level=3
+http://localhost:9000/API/users?filter=active/inactive
+
+Admins:
+http://localhost:9000/API/admins/2
+http://localhost:9000/API/admins?level=1
